@@ -1,3 +1,9 @@
+<?php
+if (isset($_SESSION['admin'])) {
+    header('Location: index.php?page=dashboard');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +15,8 @@
 <body>
     <div class="login-container">
         <h2>Admin Login</h2>
-        <form action="index.php?page=dashboard" method="POST">
-            <div class="form-group">
+        <form action="index.php?page=admin-login&command=validate" method="POST">
+        <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>

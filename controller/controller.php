@@ -9,6 +9,21 @@ class Controller
         $this->adminModel = new AdminModel();
     }
 
+    public function validateAdminLogin()
+    {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if ($this->adminModel->validateAdmin($username, $password)) {
+            $_SESSION['admin'] = $username;
+            header("Location: index.php?page=dashboard");
+            exit();
+        } else {
+            echo "<script>alert('Invalid Username or Password!');</script>";
+            include_once('view/admin/admin-login.php');
+        }
+    }
+
     public function navigatePages()
     {
         $command = isset($_GET['command']) ? $_GET['command'] : '0';
@@ -39,3 +54,4 @@ class Controller
         }
     }
 }
+?>
