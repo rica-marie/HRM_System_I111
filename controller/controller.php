@@ -72,15 +72,35 @@ class Controller
         }
     }
 
-    public function navigatesPagesEmployee(){
-        $command = $isset($_GET['comman']) ? $_GET['command'] : 0;
-
-        switch($command):
+    public function navigatesPagesEmployee()
+    {
+        $command = isset($_GET['command']) ? $_GET['command'] : 0; // Correct variable name
+    
+        switch ($command) {
             case '0':
                 include_once('view/employee/my-details.php');
-            break:
-            default
+                break;
+            case '1':
+                include_once('view/employee/leave-history.php');
+                break;
+            case '2':
+                include_once('view/employee/apply-for-leave.php'); // Adjust case as necessary
+                break;
+            case '3':
+                include_once('view/employee/update-project.php'); // Adjust case as necessary
+                break;
+            case '4':
+                include_once('view/employee/employee-attendance.php'); // Adjust case as necessary
+                break;
+            case '5':
+                session_destroy();
+                header("Location: index.php?page=employee-login.php");
+                exit();
+            default:
                 include_once('view/employee/my-details.php');
+                break;
+        }
     }
+    
 }
 ?>

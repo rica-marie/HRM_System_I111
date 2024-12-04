@@ -53,15 +53,19 @@ switch ($page) {
             exit();
         }
         break;
-    case 'employee-dashboard':
-        if ($isEmployeeLoggedIn) {
-            // Include the employee dashboard view here
-            include_once('view/employee/my-details.php'); // Create this file for employee dashboard
-        } else {
-            header("Location: index.php?page=employee-login");
-            exit();
-        }
-        break;
+        case 'employee-dashboard':
+            if ($isEmployeeLoggedIn) {
+                include_once('view/navbar-employees.php'); // Include employee navbar
+                $command = isset($_GET['command']) ? $_GET['command'] : '0';
+                include_once('controller/controller.php');
+                $controller = new Controller();
+                $controller->navigatesPagesEmployee(); // Call the employee navigation method
+            } else {
+                header("Location: index.php?page=employee-login");
+                exit();
+            }
+            break;
+        
     default:
         include_once('main.php'); // Your main landing page
         break;
