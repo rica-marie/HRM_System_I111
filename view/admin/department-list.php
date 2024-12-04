@@ -20,46 +20,31 @@
                     <tr>
                         <th>Department ID</th>
                         <th>Department Name</th>
-                        <th>Current Project</th>
-                        <th>Manager Username</th>
+                        <th>Assigned Project</th>
+                        <th>Department Manager</th>
                         <th>Add New Project</th>
                         <th>Add New Manager</th>
                         <th>Delete Department</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Sample Row -->
-                    <tr>
-                        <td>101</td>
-                        <td>Human Resources</td>
-                        <td>Employee Onboarding</td>
-                        <td>hr.manager</td>
-                        <td>
-                            <button class="btn add-project-btn">Add Project</button>
-                        </td>
-                        <td>
-                            <button class="btn add-manager-btn">Add Manager</button>
-                        </td>
-                        <td>
-                            <button class="btn delete-btn">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>IT Support</td>
-                        <td>System Upgrade</td>
-                        <td>it.manager</td>
-                        <td>
-                            <button class="btn add-project-btn">Add Project</button>
-                        </td>
-                        <td>
-                            <button class="btn add-manager-btn">Add Manager</button>
-                        </td>
-                        <td>
-                            <button class="btn delete-btn">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Additional rows can be added here -->
+                    <?php
+                    if (!empty($departments)) {
+                        foreach ($departments as $row) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['deptId']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['deptName']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['assignProject']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['deptManager']) . "</td>";
+                            echo "<td><a href='index.php?page=dashboard&command=6&deptId=" . urlencode($row['deptId']) . "' class='btn add-project-btn'>Add Project</a></td>";
+                            echo "<td><button class='btn add-manager-btn'>Add Manager</button></td>";
+                            echo "<td><button class='btn delete-btn'>Delete</button></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='7'>No departments found.</td></tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

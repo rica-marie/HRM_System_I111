@@ -31,27 +31,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Sample Row -->
-                    <tr>
-                        <td>john.doe@example.com</td>
-                        <td>John Doe</td>
-                        <td>********</td>
-                        <td>1990-01-01</td>
-                        <td>101</td>
-                        <td>Activated</td>
-                        <td>
-                            <button class="btn activate-btn">Activate</button>   
-                          
-                            <button class="btn activate-btn">Disable</button>
-                        </td>
-                        <td>
-                            <button class="btn update-dept-btn">Update</button>
-                        </td>
-                        <td>
-                            <button class="btn delete-btn">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
+                    <?php
+                    // Include the EmployeeModel
+                    include_once('model/employee.php');
+
+                    // Create an instance of EmployeeModel
+                    $employeeModel = new EmployeeModel();
+                    
+                    // Fetch all employees
+                    $employees = $employeeModel->getAllEmployees();
+
+                    // Check if there are employees and display them
+                    if ($employees) {
+                        foreach ($employees as $employee) {
+                            echo "<tr>";
+                            echo "<td>{$employee['username']}</td>";
+                            echo "<td>{$employee['name']}</td>";
+                            echo "<td>********</td>"; // Do not display the actual password
+                            echo "<td>{$employee['DOB']}</td>";
+                            echo "<td>{$employee['deptId']}</td>";
+                            echo "<td>" . ($employee['accountActive'] ? 'Activated' : 'Deactivated') . "</td>";
+                            echo "<td>
+                                    <form action='controller/adminController.php' method='post'>
+                                        <input type='hidden' name='employee_id' value='{$employee['username']}'>
+                                        <button type='submit' name='activate' class='btn'>Activate</button>
+                                        <button type='submit' name='deactivate' class='btn'>Disable</button>
+                                    </form>
+                                  </td>";
+                            echo "<td>
+                                    <button class='btn update-dept-btn'>Update</button>
+                                  </td>";
+                            echo "<td>
+                                    <form action='controller/adminController.php' method='post'>
+                                        <input type='hidden' name='employee_id' value='{$employee['username']}'>
+                                        <button type='submit' name='delete' class='btn'>Delete</button>
+                                    </form>
+                                  </td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='9'>No employees found</td></tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
