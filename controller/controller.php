@@ -31,6 +31,7 @@ class Controller
         }
     }
 
+    
     public function validateEmployeeLogin()
     {
         $username = $_POST['username'];
@@ -118,6 +119,45 @@ public function addProject()
 
 
 
+
+
+    public function employeeSignup()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $username = $_POST['username'];
+            $name = $_POST['name'];
+            $password = $_POST['password'];
+           
+            if (isset($_POST['dob'])) {
+                $dob = $_POST['dob'];  // Get DOB from the form
+            } else {
+                echo "<script>alert('Please provide a Date of Birth.');</script>";
+                include_once('view/employee/employee-signup.php');
+                return;
+            }
+            
+            // Validate that passwords match
+            if ($password !== $_POST['confirmPassword']) {
+                echo "<script>alert('Passwords do not match!');</script>";
+                include_once('view/employee/employee-signup.php');
+                return;
+            }
+            
+            // Insert employee into the database
+            if ($this->employeeModel->signUpEmployee($username,  $name,$password, $dob)) {
+                echo "<script>alert('Employee successfully registered!');</script>";
+                header("Location: index.php?page=employee-login"); // Redirect to login
+                exit();
+            } else {
+                echo "<script>alert('Error during registration. Please try again.');</script>";
+                include_once('view/employee/employee-signup.php');
+            }
+        }
+    }
+    
+ 
+ 
+    
 
     public function navigatePages()
     {

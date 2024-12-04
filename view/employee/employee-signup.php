@@ -9,14 +9,14 @@
 <body>
     <div class="login-container">
         <h2>Employee Signup</h2>
-        <form action="process-employee-signup.php" method="POST">
+        <form action="index.php?page=employee-signup&command=process" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="name">Email</label>
+                <input type="email" id="email" name="name" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -26,6 +26,12 @@
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
             </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+
             <button type="submit" class="login-btn">Sign Up</button>
         </form>
         <div class="login-footer">

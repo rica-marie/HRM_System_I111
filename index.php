@@ -39,10 +39,17 @@ switch ($page) {
             }
             break;
         
-
     case 'employee-signup':
-        include_once('view/employee/employee-signup.php');
-        break;
+            $command = isset($_GET['command']) ? $_GET['command'] : '';
+                if ($command === 'process') {
+                    include_once('controller/controller.php');
+                    $controller = new Controller();
+                    $controller->employeeSignup(); // Handle employee sign-up
+                } else {
+                    include_once('view/employee/employee-signup.php'); // Show sign-up form
+                }
+                break;
+            
     case 'dashboard':
         if ($isAdminLoggedIn) {
             include_once('controller/controller.php');
@@ -65,10 +72,12 @@ switch ($page) {
                 exit();
             }
             break;
-        
-    default:
+            
+ 
+            
+        default:
         include_once('main.php'); // Your main landing page
-        break;
+            break;
 }
 
 echo "</div>"; // Closing the center div
