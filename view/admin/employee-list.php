@@ -19,7 +19,7 @@
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Email</th>
+                        <th>Username</th>
                         <th>Name</th>
                         <th>Password</th>
                         <th>Date of Birth</th>
@@ -30,29 +30,34 @@
                         <th>Delete Employee</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Sample Row -->
-                    <tr>
-                        <td>john.doe@example.com</td>
-                        <td>John Doe</td>
-                        <td>********</td>
-                        <td>1990-01-01</td>
-                        <td>101</td>
-                        <td>Activated</td>
-                        <td>
-                            <button class="btn activate-btn">Activate</button>   
-                          
-                            <button class="btn activate-btn">Disable</button>
-                        </td>
-                        <td>
-                            <button class="btn update-dept-btn">Update</button>
-                        </td>
-                        <td>
-                            <button class="btn delete-btn">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
+                    <tbody>
+                        <?php if (!empty($employees)): ?>
+                            <?php foreach ($employees as $employee): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($employee['username']); ?></td>
+                                    <td><?php echo htmlspecialchars($employee['name']); ?></td>
+                                    <td>********</td> <!-- Do not display password for security -->
+                                    <td><?php echo htmlspecialchars($employee['DOB']); ?></td>
+                                    <td><?php echo htmlspecialchars($employee['deptId']); ?></td>
+                                    <td><?php echo htmlspecialchars($employee['accountActive']); ?></td>
+                                    <td>
+                                        <button class="btn activate-btn">Activate</button>
+                                        <button class="btn activate-btn">Disable</button>   
+                                    </td>
+                                    <td>
+                                        <button class="btn update-dept-btn">Update</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn delete-btn">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="9">No employees found.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
             </table>
         </div>
     </main>
