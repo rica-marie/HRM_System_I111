@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Login</title>
     <link rel="stylesheet" href="css/styles_admin_login.css">
-
-
 </head>
 <body>
     <div class="login-container">
         <h2>Employees Login</h2>
-        <form action="admin_dashboard.html" method="POST">
+        <form action="index.php?page=employee-login&command=validate" method="POST"> <!-- Update form action -->
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>

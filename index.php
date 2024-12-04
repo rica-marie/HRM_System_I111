@@ -2,7 +2,8 @@
 session_start();
 
 // Check if the user is logged in
-$isLoggedIn = isset($_SESSION['admin']);
+$isAdminLoggedIn = isset($_SESSION['admin']);
+$isEmployeeLoggedIn = isset($_SESSION['employee']);
 
 // Determine which page to display
 $page = isset($_GET['page']) ? $_GET['page'] : 'main';
@@ -11,7 +12,7 @@ echo "<title>HRM System</title>";
 echo "<div align='CENTER'>";
 
 // Include navbar for logged-in users
-if ($isLoggedIn) {
+if ($isAdminLoggedIn) {
     include_once('view/navbar_admin.php');
 }
 
@@ -28,20 +29,36 @@ switch ($page) {
         }
         break;
     case 'employee-login':
-        include_once('view/employee/employee-login.php');
-        break;
+        $command = isset($_GET['command']) ? $_GET['command'] : '';
+            if ($command === 'validate') {
+                include_once('controller/controller.php');
+                $controller = new Controller();
+                $controller->validateEmployeeLogin(); // Call employee login validation
+            } else {
+                include_once('view/employee/employee-login.php'); // Show login form
+            }
+            break;
+        
+
     case 'employee-signup':
         include_once('view/employee/employee-signup.php');
         break;
     case 'dashboard':
-        // Only show the dashboard if logged in
-        if ($isLoggedIn) {
+        if ($isAdminLoggedIn) {
             include_once('controller/controller.php');
             $controller = new Controller();
             $controller->navigatePages();
         } else {
-            // Redirect to the main page if not logged in
             header("Location: index.php?page=main");
+            exit();
+        }
+        break;
+    case 'employee-dashboard':
+        if ($isEmployeeLoggedIn) {
+            // Include the employee dashboard view here
+            include_once('view/employee/my-details.php'); // Create this file for employee dashboard
+        } else {
+            header("Location: index.php?page=employee-login");
             exit();
         }
         break;
