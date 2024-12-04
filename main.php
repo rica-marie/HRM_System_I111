@@ -11,13 +11,13 @@
         <h1>Human Resource Management System</h1>
         <div class="form-group">
             <h2>Welcome</h2>
-            <p>Please select an option to proceed:</p>
+            <p>Please select an option to proceed:</p>  
         </div>
         <div class="form-options">
-            <a href="admin-login.html" class="option-btn">Admin Login</a>
+            <a href="view/admin/admin-login.php" class="option-btn">Admin Login</a>
             <a href="employee-login.html" class="option-btn">Employee Login</a>
             <a href="employee-signup.html" class="option-btn">Employee Signup</a>
-        </div>
+        </div>  
     </div>
 </body>
 </html>

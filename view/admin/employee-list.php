@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+ 
     <header>
         <div class="menu-bar">
             <h1 class="logo">Employee Management</h1>
@@ -39,6 +40,8 @@
                         <td>101</td>
                         <td>Activated</td>
                         <td>
+                            <button class="btn activate-btn">Activate</button>   
+                          
                             <button class="btn activate-btn">Disable</button>
                         </td>
                         <td>
